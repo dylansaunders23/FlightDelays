@@ -8,11 +8,9 @@ import os
 import zipfile
 import shutil
 
-# Define URL and download path
 url = "https://www.transtats.bts.gov/DL_SelectFields.aspx?gnoyr_VQ=FGJ&QO_fu146_anzr=b0-gvzr"
-download_path = os.path.abspath("./bts_data")  # Ensures absolute path
+download_path = os.path.abspath("./bts_data")
 
-# Create Chrome options with download preferences
 chrome_options = webdriver.ChromeOptions()
 prefs = {
     "download.default_directory": download_path,
@@ -22,11 +20,9 @@ prefs = {
 }
 chrome_options.add_experimental_option("prefs", prefs)
 
-# Initialize Chrome driver with options
 driver = webdriver.Chrome(options=chrome_options)
 driver.get(url)
 
-# Year and month configuration
 years = ["2022", "2023", "2024"]
 months_2022 = ["November", "December"]
 months_2024 = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November"]
