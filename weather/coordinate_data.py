@@ -1,5 +1,5 @@
 import sqlite3
-from weather_data import airport_weather_query
+from weather.weather_data import airport_weather_query
 
 iata_codes = set()
 
