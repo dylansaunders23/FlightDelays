@@ -53,12 +53,12 @@ This will also be **a key feature in our analysis**, as **inclement weather in t
 ---
 
 ## **precipitation_sum**
-This column represents the **total number of inches** of any type of precipitation (**rain, snow, etc.**) recorded for a given day at a specific airport.
+This column represents the **total number of inches** as a numeric value of any type of precipitation (**rain, snow, etc.**) recorded for a given day at a specific airport.
 
 - This is a **required column**, with a default value of **0**, indicating **no recorded precipitation**.
 - In our sample, **73.9% of days** had **0 inches of precipitation**, leading to a **highly skewed distribution with notable outliers** on days with heavy rainfall or snowfall.
 - Each value in this column is **unique**, as it corresponds to the **total precipitation recorded for a specific airport on a given day**.
-- This variable is **critical for analysis**, as **precipitation levels can significantly impact flight operations**, potentially contributing to **weather-related delays**.
+- This variable is **critical for analysis**, as precipitation levels can significantly impact **flight operations and flight schedules**, potentially contributing to **weather-related delays**.
 
 This feature is expected to be **a key factor in modeling flight delays**, as **heavy precipitation can directly affect takeoffs, landings, and overall airport operations**.
 
@@ -99,20 +99,21 @@ This feature is expected to be **a key factor in modeling flight delays**, as **
 
 ### Notable Data Distributions
 
-The temperature data(both minimum and maximum), follows a seasonal trend, as expected, with high value occuring in the summer and lower values occurring during the winter. We need to be cognisant of this seasonality, which would create complications for our preprocessing:
-![alt text](image-3.png)
+The temperature data(both minimum and maximum), follows a seasonal trend, as expected, with high value occuring in the summer and lower values occurring during the winter. We need to be cognisant of this seasonality, and take it into account when preprocessing the data:
+![alt text](min_temp.png)
 
-Notable data with outliers including precipitation sum: since most days have no rain, most data points will have 0 inches of precipitation, and it seems that if it rains, it rains a lot:
-![alt text](image-1.png)
+The sum values for the different types of precipitation,(precipitation, rain, showers, snowfall) have notable outliers. Since most days have no rain, most data points will have 0 inches of precipitation. On days where precipitation occurs, it tends to be significant(especially compared to the 0 values), therefore, it creates outliers that will need to be dealt with during preprocessing:
+![alt text](prec_sum.png)
 
-The wind speed seems more normally distributed, but looking at the histogram, it is skewed to the right:
-![alt text](image-2.png)
+The wind speed seems more normally distributed:
+![alt text](wind_speed.png)
 
+But looking at the histogram, it is skewed to the right:
+![alt text](wind_dist.png)
 For these, turning it into log values will create regular distributions, which will give us a sense of how to deal with these data values during preprocessing:
-![alt text](image-4.png)
-
-![alt text](image-5.png)
+![alt text](log_wind_dist.png)
 
 ### Challenges and Observations
 
-The data collected has key trends, such as seasonality or outliers for certain variables. This provides key insights into the data but may also create complications when building the model. This will create decisions such as normalization and scaling techniques, and how to deal with outliers. Therefore, we must be extremely careful with preprocessing, which enables us to give us the best chance at creating an effective model, causing us to spend more time with preprocessing than expected. 
+The data collected has interesting variables, with noticeable skews and outliers that could provide great insight for our prediction models. However, these data sets need to be preprocessed effectively and with intent to ensure a model that does not learn biased patterns or misinterpret the relationships between values. As we saw earlier, there are normalization or scaling techniques to create uniform distributions that can be used by the model. Therefore, we must be extremely careful with preprocessing, requiring more time and effort in normalizing the data than previously expected. 
+
