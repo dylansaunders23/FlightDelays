@@ -50,6 +50,20 @@ This variable is **analogous** to the previous `carrier_delay` variable and repr
 
 This will also be **a key feature in our analysis**, as **inclement weather in the origin or destination of the flight, as well as along the flight path**, should be **very indicative of any potential delays** that could occur.
 
+---
+
+## **precipitation_sum**
+This column represents the **total number of inches** of any type of precipitation (**rain, snow, etc.**) recorded for a given day at a specific airport.
+
+- This is a **required column**, with a default value of **0**, indicating **no recorded precipitation**.
+- In our sample, **73.9% of days** had **0 inches of precipitation**, leading to a **highly skewed distribution with notable outliers** on days with heavy rainfall or snowfall.
+- Each value in this column is **unique**, as it corresponds to the **total precipitation recorded for a specific airport on a given day**.
+- This variable is **critical for analysis**, as **precipitation levels can significantly impact flight operations**, potentially contributing to **weather-related delays**.
+
+This feature is expected to be **a key factor in modeling flight delays**, as **heavy precipitation can directly affect takeoffs, landings, and overall airport operations**.
+
+---
+
 ## Cleaning Data
 
 ### Notable Data Features
@@ -82,6 +96,22 @@ This will also be **a key feature in our analysis**, as **inclement weather in t
 - To address this issue, **wind direction (along with other numerical variables) will be normalized** during preprocessing.
   - This approach provides **greater flexibility** in model tuning and ensures fair weight distribution across features.
   - Importantly, this will allow for testing **different normalization techniques** to evaluate their impact on model performance.
+
+### Notable Data Distributions
+
+The temperature data(both minimum and maximum), follows a seasonal trend, as expected, with high value occuring in the summer and lower values occurring during the winter. We need to be cognisant of this seasonality, which would create complications for our preprocessing:
+![alt text](image-3.png)
+
+Notable data with outliers including precipitation sum: since most days have no rain, most data points will have 0 inches of precipitation, and it seems that if it rains, it rains a lot:
+![alt text](image-1.png)
+
+The wind speed seems more normally distributed, but looking at the histogram, it is skewed to the right:
+![alt text](image-2.png)
+
+For these, turning it into log values will create regular distributions, which will give us a sense of how to deal with these data values during preprocessing:
+![alt text](image-4.png)
+
+![alt text](image-5.png)
 
 ### Challenges and Observations
 
